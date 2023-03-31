@@ -37,7 +37,7 @@ class _SignInState extends State<SignIn> {
     bool isopen = (prefs.getBool('open') ?? false);
     bool isPass = await checkHasPermission(isopen: isopen);
     Navigator.of(context)
-        .pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
+        .pushNamedAndRemoveUntil('/Ground', (Route<dynamic> route) => false);
     AppHelper.hideLoader(loader);
   }
 

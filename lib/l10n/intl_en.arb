@@ -10,5 +10,17 @@
   "notices" : "Notices",
   "circulars" : "Circulars",
   "faq" : "FAQ",
-  "helpline" : "Helpline"
+  "helpline" : "Helpline",
+  "recent_notices" : "Recent Notices",
+  "archieves" : "Archieves",
+  "punch_in" : "Punch In",
+  "punch_out" : "Punch Out",
+  "leave_status" : "Leave Status",
+  "mtb_circulars" : "MTB Circulars",
+  "see_more" : "See More",
+  "pending" : "Pending",
+  "waiting" : "Waiting",
+  "leaves" : "Leaves",
+  "od_ot" : "OD/OT/WFH",
+  "apply_now" : "Apply Now"
 }

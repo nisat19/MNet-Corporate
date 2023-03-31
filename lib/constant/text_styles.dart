@@ -19,15 +19,28 @@ const floatingTitleStyle = TextStyle(
   color: AppColor.primary,
 );
 
-const textTitle = TextStyle(
-  fontSize: 18,
-  color: Colors.black,
-);
+const textTitle =
+    TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold);
 
 const textSubTitle = TextStyle(
   fontSize: 10,
   color: Colors.black,
 );
+
+const textBody =
+    TextStyle(fontSize: 12, color: Colors.black, letterSpacing: 1.2);
+
+const textLarge = TextStyle(
+  fontSize: 22,
+  color: AppColor.primary,
+  fontWeight: FontWeight.bold
+);
+
+const textFaded =
+    TextStyle(fontSize: 12, color: Colors.grey, letterSpacing: 1.2);
+
+const textBodyBold = TextStyle(
+    fontSize: 12, color: AppColor.primary, fontWeight: FontWeight.bold);
 
 const appBarTitle = TextStyle(
   fontSize: 18,
@@ -39,6 +52,7 @@ const appBarSubTitle = TextStyle(
   color: Colors.white,
 );
 
+const widgetVerticaGap = 10.0;
 const textfieldgap = 23.0;
 const textLineGap = 5.0;
 

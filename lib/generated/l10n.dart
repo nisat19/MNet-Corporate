@@ -169,6 +169,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Recent Notices`
+  String get recent_notices {
+    return Intl.message(
+      'Recent Notices',
+      name: 'recent_notices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Archieves`
+  String get archieves {
+    return Intl.message(
+      'Archieves',
+      name: 'archieves',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Punch In`
+  String get punch_in {
+    return Intl.message(
+      'Punch In',
+      name: 'punch_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Punch Out`
+  String get punch_out {
+    return Intl.message(
+      'Punch Out',
+      name: 'punch_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave Status`
+  String get leave_status {
+    return Intl.message(
+      'Leave Status',
+      name: 'leave_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MTB Circulars`
+  String get mtb_circulars {
+    return Intl.message(
+      'MTB Circulars',
+      name: 'mtb_circulars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See More`
+  String get see_more {
+    return Intl.message(
+      'See More',
+      name: 'see_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting`
+  String get waiting {
+    return Intl.message(
+      'Waiting',
+      name: 'waiting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leaves`
+  String get leaves {
+    return Intl.message(
+      'Leaves',
+      name: 'leaves',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OD/OT/WFH`
+  String get od_ot {
+    return Intl.message(
+      'OD/OT/WFH',
+      name: 'od_ot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply Now`
+  String get apply_now {
+    return Intl.message(
+      'Apply Now',
+      name: 'apply_now',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

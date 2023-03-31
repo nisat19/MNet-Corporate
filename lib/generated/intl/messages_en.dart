@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
+        "apply_now": MessageLookupByLibrary.simpleMessage("Apply Now"),
+        "archieves": MessageLookupByLibrary.simpleMessage("Archieves"),
         "circulars": MessageLookupByLibrary.simpleMessage("Circulars"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "@Copyright, Mutual Trust Bank Limited"),
@@ -30,10 +32,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
         "helpline": MessageLookupByLibrary.simpleMessage("Helpline"),
         "inbox": MessageLookupByLibrary.simpleMessage("Inbox"),
+        "leave_status": MessageLookupByLibrary.simpleMessage("Leave Status"),
+        "leaves": MessageLookupByLibrary.simpleMessage("Leaves"),
+        "mtb_circulars": MessageLookupByLibrary.simpleMessage("MTB Circulars"),
         "notices": MessageLookupByLibrary.simpleMessage("Notices"),
+        "od_ot": MessageLookupByLibrary.simpleMessage("OD/OT/WFH"),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "punch_in": MessageLookupByLibrary.simpleMessage("Punch In"),
+        "punch_out": MessageLookupByLibrary.simpleMessage("Punch Out"),
+        "recent_notices":
+            MessageLookupByLibrary.simpleMessage("Recent Notices"),
+        "see_more": MessageLookupByLibrary.simpleMessage("See More"),
         "title": MessageLookupByLibrary.simpleMessage("MNet Corporate"),
         "version": MessageLookupByLibrary.simpleMessage("Version: 1.0.0"),
+        "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome to MNet")
       };
 }
