@@ -18,12 +18,12 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   late OverlayEntry loader;
-  late TextEditingController emailOrPhoneController = TextEditingController();
+  late TextEditingController usernameController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
   bool showPass = false;
   @override
   void initState() {
-    emailOrPhoneController.text = 'C2737';
+    usernameController.text = 'C2737';
     passwordController.text = '12345678';
     SchedulerBinding.instance.addPostFrameCallback((_) {
       loader = AppHelper.overlayLoader(context);
@@ -36,8 +36,8 @@ class _SignInState extends State<SignIn> {
     final prefs = await SharedPreferences.getInstance();
     bool isopen = (prefs.getBool('open') ?? false);
     bool isPass = await checkHasPermission(isopen: isopen);
-    // Navigator.of(context)
-    //     .pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/Home', (Route<dynamic> route) => false);
     AppHelper.hideLoader(loader);
   }
 
@@ -82,8 +82,8 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       children: [
                         FormFieldStyle(
-                          controller: emailOrPhoneController,
-                          label: 'Email or Phone No',
+                          controller: usernameController,
+                          label: 'Username',
                           hint: 'Enter your username',
                         ),
                         SizedBox(
@@ -103,7 +103,7 @@ class _SignInState extends State<SignIn> {
                                 }
                               });
                             },
-                            child: showPass
+                            child: !showPass
                                 ? const Icon(
                                     Icons.visibility,
                                     color: Color(0xff538234),

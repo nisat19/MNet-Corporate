@@ -18,7 +18,7 @@ class BackgroundGenerator extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         color: color != null
             ? color!.bottomColor
-            : AppColor.primary.withOpacity(0.5),
+            : Colors.amber,
       ),
       ClipPath(
         clipper: GreenClipper(),
@@ -30,7 +30,7 @@ class BackgroundGenerator extends StatelessWidget {
         clipper: CustomClipPath(),
         child: Container(
           height: MediaQuery.of(context).size.height / 6,
-          color: color != null ? color!.topColor : Colors.amber,
+          color: color != null ? color!.topColor : AppColor.primary,
         ),
       ),
       child

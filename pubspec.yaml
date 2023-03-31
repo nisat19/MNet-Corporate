@@ -54,6 +54,8 @@ dependencies:
   sqflite: ^2.2.6
   intl: ^0.17.0
   intl_generator: ^0.4.1
+  cached_network_image: ^3.2.3
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +83,7 @@ flutter:
   assets:
     - assets/
     - assets/cfg/
+    - assets/gif/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

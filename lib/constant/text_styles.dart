@@ -14,22 +14,30 @@ TextStyle getSubHeaderStyle(BuildContext context) {
   return Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.black);
 }
 
-TextStyle getTitleStyle(BuildContext context) {
-  return Theme.of(context)
-      .textTheme
-      .titleLarge!
-      .copyWith(fontWeight: FontWeight.bold, color: AppColor.textBody);
-}
-
-TextStyle getSubTitleStyle(BuildContext context) {
-  return Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.black);
-}
-
 const floatingTitleStyle = TextStyle(
   fontSize: 20,
   color: AppColor.primary,
 );
 
+const textTitle = TextStyle(
+  fontSize: 18,
+  color: Colors.black,
+);
+
+const textSubTitle = TextStyle(
+  fontSize: 10,
+  color: Colors.black,
+);
+
+const appBarTitle = TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+);
+
+const appBarSubTitle = TextStyle(
+  fontSize: 10,
+  color: Colors.white,
+);
 
 const textfieldgap = 23.0;
 const textLineGap = 5.0;

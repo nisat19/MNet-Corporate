@@ -79,6 +79,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to MNet`
+  String get welcome {
+    return Intl.message(
+      'Welcome to MNet',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emp ID: %s`
+  String get emp_id {
+    return Intl.message(
+      'Emp ID: %s',
+      name: 'emp_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inbox`
+  String get inbox {
+    return Intl.message(
+      'Inbox',
+      name: 'inbox',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notices`
+  String get notices {
+    return Intl.message(
+      'Notices',
+      name: 'notices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Circulars`
+  String get circulars {
+    return Intl.message(
+      'Circulars',
+      name: 'circulars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FAQ`
+  String get faq {
+    return Intl.message(
+      'FAQ',
+      name: 'faq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Helpline`
+  String get helpline {
+    return Intl.message(
+      'Helpline',
+      name: 'helpline',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

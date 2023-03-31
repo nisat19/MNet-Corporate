@@ -22,9 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "circulars": MessageLookupByLibrary.simpleMessage("Circulars"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "@Copyright, Mutual Trust Bank Limited"),
+        "emp_id": MessageLookupByLibrary.simpleMessage("Emp ID: %s"),
+        "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
+        "helpline": MessageLookupByLibrary.simpleMessage("Helpline"),
+        "inbox": MessageLookupByLibrary.simpleMessage("Inbox"),
+        "notices": MessageLookupByLibrary.simpleMessage("Notices"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "title": MessageLookupByLibrary.simpleMessage("MNet Corporate"),
-        "version": MessageLookupByLibrary.simpleMessage("Version: 1.0.0")
+        "version": MessageLookupByLibrary.simpleMessage("Version: 1.0.0"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to MNet")
       };
 }

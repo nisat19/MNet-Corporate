@@ -1,5 +1,14 @@
 {
   "title" : "MNet Corporate",
   "version": "Version: 1.0.0",
-  "copy_right": "@Copyright, Mutual Trust Bank Limited"
+  "copy_right": "@Copyright, Mutual Trust Bank Limited",
+  "welcome" : "Welcome to MNet",
+  "emp_id" : "Emp ID: %s",
+  "profile" : "Profile",
+  "inbox" : "Inbox",
+  "about" : "About",
+  "notices" : "Notices",
+  "circulars" : "Circulars",
+  "faq" : "FAQ",
+  "helpline" : "Helpline"
 }
