@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mnet_corporate/constant/app_color.dart';
+import 'package:mnet_corporate/res/color/app_color.dart';
 
 Widget buildImage(String imagePath, double size, Color borderColor,
     double borderWidth, VoidCallback onClicked) {

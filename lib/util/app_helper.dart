@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:mnet_corporate/common/size_config.dart';
+import 'package:mnet_corporate/util/size_config.dart';
 
 class AppHelper {
   late BuildContext context;

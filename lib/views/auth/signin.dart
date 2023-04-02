@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:mnet_corporate/common/app_helper.dart';
-import 'package:mnet_corporate/common/permission_handler.dart';
-import 'package:mnet_corporate/constant/form_field_style.dart';
-import 'package:mnet_corporate/constant/text_styles.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
+import 'package:mnet_corporate/res/string/text_styles.dart';
+import 'package:mnet_corporate/util/app_helper.dart';
+import 'package:mnet_corporate/util/form_field_style.dart';
+import 'package:mnet_corporate/util/permission_handler.dart';
 import 'package:mnet_corporate/views/background_generator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:mnet_corporate/constant/app_color.dart';
+import 'package:mnet_corporate/res/color/app_color.dart';
 
 TextStyle getHeaderStyle(BuildContext context) {
   return Theme.of(context)

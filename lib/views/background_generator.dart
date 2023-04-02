@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mnet_corporate/common/design_clippath.dart';
-import 'package:mnet_corporate/constant/app_color.dart';
+import 'package:mnet_corporate/res/color/app_color.dart';
+import 'package:mnet_corporate/util/design_clippath.dart';
 
 // ignore: must_be_immutable
 class BackgroundGenerator extends StatelessWidget {

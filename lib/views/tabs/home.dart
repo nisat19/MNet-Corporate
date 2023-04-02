@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mnet_corporate/common/fadeIn.dart';
-import 'package:mnet_corporate/common/size_config.dart';
-import 'package:mnet_corporate/constant/app_color.dart';
-import 'package:mnet_corporate/constant/text_styles.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
 import 'package:mnet_corporate/provider/noticeProvider.dart';
+import 'package:mnet_corporate/res/color/app_color.dart';
+import 'package:mnet_corporate/res/string/text_styles.dart';
+import 'package:mnet_corporate/util/fadeIn.dart';
+import 'package:mnet_corporate/util/size_config.dart';
 import 'package:mnet_corporate/views/shimmer/skeleton.dart';
 import 'package:provider/provider.dart';
 

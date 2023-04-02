@@ -1,16 +1,14 @@
-import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mnet_corporate/common/app_helper.dart';
-import 'package:mnet_corporate/common/size_config.dart';
-import 'package:mnet_corporate/constant/app_color.dart';
-import 'package:mnet_corporate/constant/app_constant.dart';
-import 'package:mnet_corporate/constant/common_widget.dart';
-import 'package:mnet_corporate/constant/text_styles.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:mnet_corporate/res/color/app_color.dart';
+import 'package:mnet_corporate/res/string/text_styles.dart';
+import 'package:mnet_corporate/util/app_constant.dart';
+import 'package:mnet_corporate/util/app_helper.dart';
+import 'package:mnet_corporate/util/common_widget.dart';
+import 'package:mnet_corporate/util/size_config.dart';
 
 class Ground extends StatefulWidget {
   const Ground({super.key});

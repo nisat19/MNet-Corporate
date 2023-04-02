@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mnet_corporate/common/LanguageChangeProvider.dart';
-import 'package:mnet_corporate/common/route_generator.dart';
-import 'package:mnet_corporate/constant/connection_status.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
+import 'package:mnet_corporate/provider/LanguageChangeProvider.dart';
 import 'package:mnet_corporate/provider/noticeProvider.dart';
+import 'package:mnet_corporate/util/connection_status.dart';
+import 'package:mnet_corporate/util/route_generator.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
