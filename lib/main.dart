@@ -33,9 +33,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LanguageChangeProvider>(
-            create: (context) => LanguageChangeProvider()),
-        ChangeNotifierProvider<NoticeProvider>(
-            create: (context) => NoticeProvider())
+            create: (context) => LanguageChangeProvider())
       ],
       child: Builder(builder: (context) {
         return MaterialApp(

@@ -1,12 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mnet_corporate/data/remote/response/Status.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
+import 'package:mnet_corporate/model/notice.dart';
 import 'package:mnet_corporate/provider/noticeProvider.dart';
 import 'package:mnet_corporate/res/color/app_color.dart';
 import 'package:mnet_corporate/res/string/text_styles.dart';
 import 'package:mnet_corporate/util/fadeIn.dart';
 import 'package:mnet_corporate/util/size_config.dart';
+import 'package:mnet_corporate/view_model/NoticeListVM.dart';
 import 'package:mnet_corporate/views/shimmer/skeleton.dart';
 import 'package:provider/provider.dart';
 
@@ -18,21 +21,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final NoticeListVM viewModel = NoticeListVM();
+
   var refreshKey = GlobalKey<RefreshIndicatorState>();
-  bool _isLoading = false;
   int currentIndex = 0;
 
   @override
   void initState() {
+    viewModel.fetchNotices();
     super.initState();
-    _getData();
-  }
-
-  Future<void> _getData() async {
-    _isLoading = true;
-    final noticeData = Provider.of<NoticeProvider>(context, listen: false);
-    noticeData.getNotices();
-    _isLoading = false;
   }
 
   @override
@@ -64,117 +61,125 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 10,
               ),
-              Consumer<NoticeProvider>(
-                builder: (context, noticeProv, _) {
-                  if (noticeProv.isRequestError) {
-                    return Center(child: Text(S.of(context).error));
-                  }
-                  return _isLoading ||
-                          noticeProv.isLoading ||
-                          noticeProv.notices.isEmpty
-                      ? AspectRatio(
-                          aspectRatio: 2.8,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Skeleton(),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Skeleton(),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Skeleton(),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Skeleton(
-                                    width: 200,
-                                  ),
-                                ],
+              ChangeNotifierProvider.value(
+                value: viewModel,
+                child: Consumer<NoticeListVM>(
+                  builder: (context, viewModel, _) {
+                    switch (viewModel.notices.status) {
+                      case Status.LOADING:
+                        return AspectRatio(
+                            aspectRatio: 2.8,
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Skeleton(),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Skeleton(),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Skeleton(),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Skeleton(
+                                      width: 200,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      : FadeIn(
-                          curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 250),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CarouselSlider(
-                                options: CarouselOptions(
-                                  autoPlay: true,
-                                  aspectRatio: 2.8,
-                                  viewportFraction: 1,
-                                  enlargeCenterPage: true,
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      currentIndex = index;
-                                    });
-                                  },
+                          );
+                        case Status.ERROR:
+                        return Center(child: Text(S.of(context).error));
+                        case Status.COMPLETED:
+                        List<Notice>? notices = viewModel.notices.data?.notices;
+                        return
+                            FadeIn(
+                            curve: Curves.easeIn,
+                            duration: const Duration(milliseconds: 250),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CarouselSlider(
+                                  options: CarouselOptions(
+                                    autoPlay: true,
+                                    aspectRatio: 2.8,
+                                    viewportFraction: 1,
+                                    enlargeCenterPage: true,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        currentIndex = index;
+                                      });
+                                    },
+                                  ),
+                                  items: notices!
+                                      .map((item) => SizedBox(
+                                            width: SizeConfig.screenWidth,
+                                            child: Card(
+                                                child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    item.title,
+                                                    maxLines: 3,
+                                                    style: textBody,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    item.subTitle,
+                                                    maxLines: 1,
+                                                    style: textBodyBold,
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                          ))
+                                      .toList(),
                                 ),
-                                items: noticeProv.notices
-                                    .map((item) => SizedBox(
-                                          width: SizeConfig.screenWidth,
-                                          child: Card(
-                                              child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  item.title,
-                                                  maxLines: 3,
-                                                  style: textBody,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  item.subTitle,
-                                                  maxLines: 1,
-                                                  style: textBodyBold,
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                        ))
-                                    .toList(),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: noticeProv.notices
-                                    .asMap()
-                                    .entries
-                                    .map((entry) {
-                                  return Container(
-                                    width: 9.0,
-                                    height: 9.0,
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 4.0, horizontal: 4.0),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: (Theme.of(context).brightness ==
-                                                    Brightness.dark
-                                                ? Colors.white
-                                                : AppColor.primary)
-                                            .withOpacity(
-                                                currentIndex == entry.key
-                                                    ? 0.9
-                                                    : 0.4)),
-                                  );
-                                }).toList(),
-                              )
-                            ],
-                          ),
-                        );
-                },
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: notices.asMap().entries.
+                                      map((entry) {
+                                    return Container(
+                                      width: 9.0,
+                                      height: 9.0,
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 4.0, horizontal: 4.0),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color:
+                                              (Theme.of(context).brightness ==
+                                                          Brightness.dark
+                                                      ? Colors.white
+                                                      : AppColor.primary)
+                                                  .withOpacity(
+                                                      currentIndex == entry.key
+                                                          ? 0.9
+                                                          : 0.4)),
+                                    );
+                                  }).toList(),
+                                )
+                              ],
+                            ),
+                          );
+                      default:
+                      return Container();
+                    }
+                  
+                  },
+                ),
               ),
               const SizedBox(
                 height: widgetVerticaGap,
