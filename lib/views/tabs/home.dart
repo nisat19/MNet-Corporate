@@ -68,116 +68,112 @@ class _HomeState extends State<Home> {
                     switch (viewModel.notices.status) {
                       case Status.LOADING:
                         return AspectRatio(
-                            aspectRatio: 2.8,
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Skeleton(),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Skeleton(),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Skeleton(),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Skeleton(
-                                      width: 200,
-                                    ),
-                                  ],
-                                ),
+                          aspectRatio: 2.8,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Skeleton(),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Skeleton(),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Skeleton(),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Skeleton(
+                                    width: 200,
+                                  ),
+                                ],
                               ),
                             ),
-                          );
-                        case Status.ERROR:
+                          ),
+                        );
+                      case Status.ERROR:
                         return Center(child: Text(S.of(context).error));
-                        case Status.COMPLETED:
+                      case Status.COMPLETED:
                         List<Notice>? notices = viewModel.notices.data?.notices;
-                        return
-                            FadeIn(
-                            curve: Curves.easeIn,
-                            duration: const Duration(milliseconds: 250),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CarouselSlider(
-                                  options: CarouselOptions(
-                                    autoPlay: true,
-                                    aspectRatio: 2.8,
-                                    viewportFraction: 1,
-                                    enlargeCenterPage: true,
-                                    onPageChanged: (index, reason) {
-                                      setState(() {
-                                        currentIndex = index;
-                                      });
-                                    },
-                                  ),
-                                  items: notices!
-                                      .map((item) => SizedBox(
-                                            width: SizeConfig.screenWidth,
-                                            child: Card(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    item.title,
-                                                    maxLines: 3,
-                                                    style: textBody,
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    item.subTitle,
-                                                    maxLines: 1,
-                                                    style: textBodyBold,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                          ))
-                                      .toList(),
+                        return FadeIn(
+                          curve: Curves.easeIn,
+                          duration: const Duration(milliseconds: 250),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                  autoPlay: true,
+                                  aspectRatio: 2.8,
+                                  viewportFraction: 1,
+                                  enlargeCenterPage: true,
+                                  onPageChanged: (index, reason) {
+                                    setState(() {
+                                      currentIndex = index;
+                                    });
+                                  },
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: notices.asMap().entries.
-                                      map((entry) {
-                                    return Container(
-                                      width: 9.0,
-                                      height: 9.0,
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 4.0),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color:
-                                              (Theme.of(context).brightness ==
-                                                          Brightness.dark
-                                                      ? Colors.white
-                                                      : AppColor.primary)
-                                                  .withOpacity(
-                                                      currentIndex == entry.key
-                                                          ? 0.9
-                                                          : 0.4)),
-                                    );
-                                  }).toList(),
-                                )
-                              ],
-                            ),
-                          );
+                                items: notices!
+                                    .map((item) => SizedBox(
+                                          width: SizeConfig.screenWidth,
+                                          child: Card(
+                                              child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.title,
+                                                  maxLines: 3,
+                                                  style: textBody,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  item.subTitle,
+                                                  maxLines: 1,
+                                                  style: textBodyBold,
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                        ))
+                                    .toList(),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: notices.asMap().entries.map((entry) {
+                                  return Container(
+                                    width: currentIndex == entry.key ? 16 : 4.0,
+                                    height: 4.0,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                                  borderRadius: const BorderRadius.all(Radius.circular(2)),
+                                        color: (Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? Colors.white
+                                                : AppColor.primary)
+                                            .withOpacity(
+                                                currentIndex == entry.key
+                                                    ? 0.9
+                                                    : 0.4)),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
+                        );
                       default:
-                      return Container();
+                        return Container();
                     }
-                  
                   },
                 ),
               ),

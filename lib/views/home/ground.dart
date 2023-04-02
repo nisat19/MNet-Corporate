@@ -30,10 +30,6 @@ class _GroundState extends State<Ground> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.light,
-            ),
             automaticallyImplyLeading: false,
             backgroundColor: AppColor.primary,
             elevation: 0,
