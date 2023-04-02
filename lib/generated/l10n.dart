@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Error while loading data. Please try again.`
+  String get error {
+    return Intl.message(
+      'Error while loading data. Please try again.',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome to MNet`
   String get welcome {
     return Intl.message(

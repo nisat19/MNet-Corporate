@@ -8,6 +8,7 @@ import 'package:mnet_corporate/common/LanguageChangeProvider.dart';
 import 'package:mnet_corporate/common/route_generator.dart';
 import 'package:mnet_corporate/constant/connection_status.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
+import 'package:mnet_corporate/provider/noticeProvider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -29,32 +30,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LanguageChangeProvider>(
-      create: (context) => LanguageChangeProvider(),
-      child: Builder(
-        builder: (context) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            onGenerateTitle: (context) => S.of(context).title,
-            onGenerateRoute: RouteGenerator.generateRoute,
-            theme: ThemeData(
-              primarySwatch: Colors.teal,
-              textTheme:
-                  GoogleFonts.nunitoSansTextTheme(Theme.of(context).textTheme),
-            ),
-            locale: Provider.of<LanguageChangeProvider>(context, listen: true)
-                    .currentLocale,
-            initialRoute: '/SignIn',
-            localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-          );
-        }
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LanguageChangeProvider>(
+            create: (context) => LanguageChangeProvider()),
+        ChangeNotifierProvider<NoticeProvider>(
+            create: (context) => NoticeProvider())
+      ],
+      child: Builder(builder: (context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateTitle: (context) => S.of(context).title,
+          onGenerateRoute: RouteGenerator.generateRoute,
+          theme: ThemeData(
+            primarySwatch: Colors.teal,
+            textTheme:
+                GoogleFonts.nunitoSansTextTheme(Theme.of(context).textTheme),
+          ),
+          locale: Provider.of<LanguageChangeProvider>(context, listen: true)
+              .currentLocale,
+          initialRoute: '/SignIn',
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+        );
+      }),
     );
   }
 }

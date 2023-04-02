@@ -2,6 +2,7 @@
   "title" : "MNet Corporate",
   "version": "Version: 1.0.0",
   "copy_right": "@Copyright, Mutual Trust Bank Limited",
+  "error" : "Error while loading data. Please try again.",
   "welcome" : "Welcome to MNet",
   "emp_id" : "Emp ID: %s",
   "profile" : "Profile",

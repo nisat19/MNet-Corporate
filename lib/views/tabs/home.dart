@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mnet_corporate/common/fadeIn.dart';
 import 'package:mnet_corporate/common/size_config.dart';
 import 'package:mnet_corporate/constant/app_color.dart';
 import 'package:mnet_corporate/constant/text_styles.dart';
 import 'package:mnet_corporate/generated/l10n.dart';
+import 'package:mnet_corporate/provider/noticeProvider.dart';
+import 'package:mnet_corporate/views/shimmer/skeleton.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,9 +18,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  bool _isLoading = false;
   int currentIndex = 0;
-  final CarouselController _controller = CarouselController();
-  List<int> list = [1, 2, 3, 4, 5];
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  Future<void> _getData() async {
+    _isLoading = true;
+    final noticeData = Provider.of<NoticeProvider>(context, listen: false);
+    noticeData.getNotices();
+    _isLoading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,133 +41,190 @@ class _HomeState extends State<Home> {
     return Container(
         width: SizeConfig.screenWidth,
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  S.of(context).recent_notices,
-                  style: textTitle,
-                ),
-                Text(
-                  S.of(context).archieves,
-                  style: textSubTitle,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CarouselSlider(
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2.8,
-                    viewportFraction: 1,
-                    enlargeCenterPage: true,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
+        child: RefreshIndicator(
+          key: refreshKey,
+          onRefresh: () async => _refreshData(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    S.of(context).recent_notices,
+                    style: textTitle,
                   ),
-                  items: list
-                      .map((item) => SizedBox(
-                            width: SizeConfig.screenWidth,
-                            child: Card(
-                                child: Padding(
+                  Text(
+                    S.of(context).archieves,
+                    style: textSubTitle,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Consumer<NoticeProvider>(
+                builder: (context, noticeProv, _) {
+                  if (noticeProv.isRequestError) {
+                    return Center(child: Text(S.of(context).error));
+                  }
+                  return _isLoading ||
+                          noticeProv.isLoading ||
+                          noticeProv.notices.isEmpty
+                      ? AspectRatio(
+                          aspectRatio: 2.8,
+                          child: Card(
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                  Text(
-                                    'A circular is published in MNET on Special Security Measures during Upcoming Long Weekends....',
-                                    maxLines: 3,
-                                    style: textBody,
+                                  Skeleton(),
+                                  SizedBox(
+                                    height: 5,
                                   ),
+                                  Skeleton(),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Skeleton(),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    'Notice in Detail',
-                                    maxLines: 1,
-                                    style: textBodyBold,
+                                  Skeleton(
+                                    width: 200,
                                   ),
                                 ],
                               ),
-                            )),
-                          ))
-                      .toList(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: list.asMap().entries.map((entry) {
-                    return Container(
-                      width: 9.0,
-                      height: 9.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 4.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              (Theme.of(context).brightness == Brightness.dark
-                                      ? Colors.white
-                                      : AppColor.primary)
-                                  .withOpacity(
-                                      currentIndex == entry.key ? 0.9 : 0.4)),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(
-                  height: widgetVerticaGap,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    punchTime('09:53 AM', '26 March', PunchType.punchIn),
-                    punchTime('04:48 PM', '26 March', PunchType.punchOut)
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: widgetVerticaGap,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  S.of(context).leave_status,
-                  style: textTitle,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: widgetVerticaGap,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  S.of(context).mtb_circulars,
-                  style: textTitle,
-                ),
-                Text(
-                  S.of(context).see_more,
-                  style: textSubTitle,
-                ),
-              ],
-            ),
-          ],
+                            ),
+                          ),
+                        )
+                      : FadeIn(
+                          curve: Curves.easeIn,
+                          duration: const Duration(milliseconds: 250),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                  autoPlay: true,
+                                  aspectRatio: 2.8,
+                                  viewportFraction: 1,
+                                  enlargeCenterPage: true,
+                                  onPageChanged: (index, reason) {
+                                    setState(() {
+                                      currentIndex = index;
+                                    });
+                                  },
+                                ),
+                                items: noticeProv.notices
+                                    .map((item) => SizedBox(
+                                          width: SizeConfig.screenWidth,
+                                          child: Card(
+                                              child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.title,
+                                                  maxLines: 3,
+                                                  style: textBody,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  item.subTitle,
+                                                  maxLines: 1,
+                                                  style: textBodyBold,
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                        ))
+                                    .toList(),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: noticeProv.notices
+                                    .asMap()
+                                    .entries
+                                    .map((entry) {
+                                  return Container(
+                                    width: 9.0,
+                                    height: 9.0,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? Colors.white
+                                                : AppColor.primary)
+                                            .withOpacity(
+                                                currentIndex == entry.key
+                                                    ? 0.9
+                                                    : 0.4)),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
+                        );
+                },
+              ),
+              const SizedBox(
+                height: widgetVerticaGap,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  punchTime('09:53 AM', '26 March', PunchType.punchIn),
+                  punchTime('04:48 PM', '26 March', PunchType.punchOut)
+                ],
+              ),
+              const SizedBox(
+                height: widgetVerticaGap,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    S.of(context).leave_status,
+                    style: textTitle,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: widgetVerticaGap,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    S.of(context).mtb_circulars,
+                    style: textTitle,
+                  ),
+                  Text(
+                    S.of(context).see_more,
+                    style: textSubTitle,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ));
+  }
+
+  Future<void> _refreshData(BuildContext context) async {
+    refreshKey.currentState?.show(atTop: false);
+    await Provider.of<NoticeProvider>(context, listen: false)
+        .getNotices(isRefresh: true);
   }
 
   Widget punchTime(String time, String date, PunchType type) {

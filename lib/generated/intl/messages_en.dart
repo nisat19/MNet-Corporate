@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "@Copyright, Mutual Trust Bank Limited"),
         "emp_id": MessageLookupByLibrary.simpleMessage("Emp ID: %s"),
+        "error": MessageLookupByLibrary.simpleMessage(
+            "Error while loading data. Please try again."),
         "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
         "helpline": MessageLookupByLibrary.simpleMessage("Helpline"),
         "inbox": MessageLookupByLibrary.simpleMessage("Inbox"),
